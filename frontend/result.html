@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Results – FairAI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar scrolled">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">F</div>
+        FairAI
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container result-content">
+    <a href="dashboard.html" class="back-link animate-fade-up">← Back to Dashboard</a>
+
+    <div class="page-header animate-fade-up delay-1">
+      <h1>Analysis Results</h1>
+    </div>
+
+    <!-- Bias Score -->
+    <div class="card bias-score-card animate-scale-in delay-2">
+      <div class="score-label">Bias Score</div>
+      <div class="score-value" id="scoreValue">—</div>
+      <div class="score-badge" id="scoreBadge">Loading…</div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-grid">
+      <div class="card stat-card animate-fade-up delay-3">
+        <div class="stat-header">
+          <span class="stat-label">Male Approval Rate</span>
+          <span class="stat-count" id="maleCount">—</span>
+        </div>
+        <div class="stat-value" id="maleRate">—</div>
+        <div class="progress-bar">
+          <div class="progress-fill primary" id="maleBar" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="card stat-card animate-fade-up delay-4">
+        <div class="stat-header">
+          <span class="stat-label">Female Approval Rate</span>
+          <span class="stat-count" id="femaleCount">—</span>
+        </div>
+        <div class="stat-value" id="femaleRate">—</div>
+        <div class="progress-bar">
+          <div class="progress-fill accent" id="femaleBar" style="width:0%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Explanation -->
+    <div class="card explanation-card animate-fade-up delay-4">
+      <div class="card-title"><span>📈</span> AI Explanation</div>
+      <p id="explanation">Loading analysis…</p>
+    </div>
+
+    <!-- Suggestions -->
+    <div class="card suggestions-card animate-fade-up delay-5">
+      <h3>Recommendations</h3>
+      <ul class="suggestion-list" id="suggestions"></ul>
+    </div>
+
+    <a href="dashboard.html" class="btn-primary">Analyze Again</a>
+  </div>
+
+  <script src="js/result.js"></script>
+</body>
+</html>

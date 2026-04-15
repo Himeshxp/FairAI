@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard – FairAI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar scrolled">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <div class="logo-icon">F</div>
+        FairAI
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html" class="active">Dashboard</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container dashboard-content">
+    <div class="page-header animate-fade-up">
+      <h1>Dashboard</h1>
+      <p>Upload data or manually add records to analyze for bias.</p>
+    </div>
+
+    <div class="dashboard-grid">
+      <!-- Upload Zone -->
+      <div class="upload-zone animate-fade-up delay-1" id="uploadZone">
+        <div class="upload-icon">📁</div>
+        <h3>Drag & drop CSV file</h3>
+        <p>or click to browse your files</p>
+        <label for="csvInput">Browse Files</label>
+        <input type="file" id="csvInput" accept=".csv" />
+      </div>
+
+      <!-- Manual Input -->
+      <div class="card manual-input animate-fade-up delay-2">
+        <h3>Manual Input</h3>
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select id="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="score">Score</label>
+          <input type="number" id="score" placeholder="e.g. 85" />
+        </div>
+        <div class="form-group">
+          <label for="decision">Decision</label>
+          <select id="decision">
+            <option value="Approved">Approved</option>
+            <option value="Rejected">Rejected</option>
+          </select>
+        </div>
+        <button class="btn-add" id="addRecord">
+          <span>+</span> Add Record
+        </button>
+      </div>
+    </div>
+
+    <!-- Data Table -->
+    <div class="card table-section animate-fade-up delay-3" id="tableSection" style="display:none;">
+      <div class="table-header">
+        <h3><span id="recordCount">0</span> Records</h3>
+        <button class="btn-clear" id="clearAll">🗑 Clear All</button>
+      </div>
+      <div class="data-table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Gender</th>
+              <th>Score</th>
+              <th>Decision</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="card empty-state animate-fade-up delay-3" id="emptyState">
+      <span>📊</span>
+      No records yet. Upload a CSV or add records manually.
+    </div>
+
+    <!-- Analyze Button -->
+    <button class="btn-primary" id="analyzeBtn" disabled style="opacity:0.4;cursor:not-allowed;">
+      📊 Analyze for Bias
+    </button>
+  </div>
+
+  <script src="js/upload.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Dashboard logic
+    const records = [];
+    const tableBody = document.getElementById('tableBody');
+    const tableSection = document.getElementById('tableSection');
+    const emptyState = document.getElementById('emptyState');
+    const recordCount = document.getElementById('recordCount');
+    const analyzeBtn = document.getElementById('analyzeBtn');
+
+    function updateTable() {
+      const hasRecords = records.length > 0;
+      tableSection.style.display = hasRecords ? 'block' : 'none';
+      emptyState.style.display = hasRecords ? 'none' : 'block';
+      analyzeBtn.disabled = !hasRecords;
+      analyzeBtn.style.opacity = hasRecords ? '1' : '0.4';
+      analyzeBtn.style.cursor = hasRecords ? 'pointer' : 'not-allowed';
+      recordCount.textContent = records.length;
+
+      tableBody.innerHTML = records.map((r, i) =>
+        `<tr>
+          <td>${i + 1}</td>
+          <td>${r.gender}</td>
+          <td>${r.score}</td>
+          <td><span class="badge ${r.decision === 'Approved' ? 'badge-success' : 'badge-danger'}">${r.decision}</span></td>
+        </tr>`
+      ).join('');
+    }
+
+    // Manual add
+    document.getElementById('addRecord').addEventListener('click', () => {
+      const gender = document.getElementById('gender').value;
+      const score = document.getElementById('score').value;
+      const decision = document.getElementById('decision').value;
+      if (!score) return;
+      records.push({ gender, score: Number(score), decision });
+      document.getElementById('score').value = '';
+      updateTable();
+    });
+
+    // Clear
+    document.getElementById('clearAll').addEventListener('click', () => {
+      records.length = 0;
+      updateTable();
+    });
+
+    // CSV upload callback
+    window.onCSVParsed = function(data) {
+      data.forEach(r => records.push(r));
+      updateTable();
+    };
+
+    // Analyze
+    analyzeBtn.addEventListener('click', () => {
+      if (records.length === 0) return;
+      sessionStorage.setItem('fairai_data', JSON.stringify(records));
+      window.location.href = 'result.html';
+    });
+  </script>
+</body>
+</html>
