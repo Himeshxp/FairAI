@@ -19,7 +19,7 @@
       <ul class="nav-links">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="dashboard.html">Dashboard</a></li>
-        <li><a href="dashboard.html" class="btn-primary" style="padding:10px 24px;font-size:13px;">Get Started</a></li>
+        <li><a href="dashboard.html" class="btn-primary dashboard-btn" style="color: var(--text-contrast);">Get Started</a></li>
       </ul>
     </div>
   </nav>
@@ -50,18 +50,24 @@
         <p>Comprehensive tools to detect, explain, and mitigate algorithmic bias.</p>
       </div>
       <div class="features-grid">
-        <div class="feature-card card animate-fade-up delay-1">
-          <div class="feature-icon">🛡</div>
+        <div class="feature-card card" id="card-1">
+          <div class="img-wrapper">
+            <img src="./assests/detection.png" width="52px" height="52px" class="feature-icon">
+          </div>
           <h3>Bias Detection</h3>
           <p>Automatically identify demographic disparities in AI-driven decisions with statistical rigor and precision.</p>
         </div>
-        <div class="feature-card card animate-fade-up delay-2">
-          <div class="feature-icon">🧠</div>
+        <div class="feature-card card" id="card-2">
+          <div class="img-wrapper">
+            <img src="./assests/brain.png" width="52px" height="52px" class="feature-icon">
+          </div>
           <h3>AI Explanation</h3>
           <p>Get clear, human-readable explanations of why bias exists and exactly where it originates in your data.</p>
         </div>
-        <div class="feature-card card animate-fade-up delay-3">
-          <div class="feature-icon">💡</div>
+        <div class="feature-card card" id="card-3">
+          <div class="img-wrapper">
+            <img src="./assests/idea.png" width="52px" height="52px" class="feature-icon">
+          </div>
           <h3>Smart Suggestions</h3>
           <p>Receive actionable recommendations to mitigate detected biases and continuously improve fairness.</p>
         </div>
@@ -72,7 +78,7 @@
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      © 2025 FairAI. Built for responsible AI.
+      © 2026 FairAI. Built for responsible AI.
     </div>
   </footer>
 

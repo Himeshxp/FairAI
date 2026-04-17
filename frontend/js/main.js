@@ -1,27 +1,13 @@
 // ===== FairAI – main.js =====
-// Handles navbar scroll effect and shared utilities
 
 (function () {
   'use strict';
 
-  // Sticky navbar background on scroll
-  const navbar = document.getElementById('navbar');
-  if (navbar) {
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 20);
-    });
-  }
-
-  // Simple Type Animation
+  // Simple Blur Animation Paired With CSS
   const element = document.getElementById("main-name");
-
-  if (!element) {
-    console.error("main-name not found");
-    return;
-  }
+  if (!element) return;
 
   const text = element.textContent.trim();
-
   element.textContent = "";
 
   text.split("").forEach((char, index) => {
@@ -32,6 +18,24 @@
 
     element.appendChild(span);
   });
+
+  // Staggering Card Animation On Scroll
+  const grid = document.querySelector('.features-grid');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+      } else {
+        // remove to replay animation on scroll again
+        entry.target.classList.remove('show');
+      }
+    });
+  }, {
+    threshold: 0.4
+  });
+
+  observer.observe(grid);
 
   // Placeholder API helper (returns dummy JSON)
   window.fairaiAPI = {

@@ -9,7 +9,7 @@
 <body>
 
   <!-- Navbar -->
-  <nav class="navbar scrolled">
+  <nav class="navbar">
     <div class="container">
       <a href="index.html" class="logo">
         <div class="logo-icon">F</div>
@@ -23,55 +23,71 @@
   </nav>
 
   <div class="container dashboard-content">
+  
     <div class="page-header animate-fade-up">
-      <h1>Dashboard</h1>
-      <p>Upload data or manually add records to analyze for bias.</p>
+      <h1>Bias Analyzer</h1>
+      <p>Upload a dataset or add records manually to evaluate decision fairness.</p>
     </div>
-
-    <div class="dashboard-grid">
-      <!-- Upload Zone -->
+  
+    <div class="dashboard-flex">
+    
+      <!-- Upload -->
       <div class="upload-zone animate-fade-up delay-1" id="uploadZone">
-        <div class="upload-icon">📁</div>
-        <h3>Drag & drop CSV file</h3>
-        <p>or click to browse your files</p>
-        <label for="csvInput">Browse Files</label>
-        <input type="file" id="csvInput" accept=".csv" />
+        <img src="./assests/csv.png" class="upload-icon">
+      
+        <h3>Upload CSV</h3>
+        <p>Drop your file here or</p>
+      
+        <div class="cta-buttons">
+          <label for="csvInput">Browse Files</label>
+          <input type="file" id="csvInput" accept=".csv" />
+          <button class="btn-switch" id="switchBtn">
+            Manual Mode
+          </button>
+        </div>
       </div>
-
-      <!-- Manual Input -->
-      <div class="card manual-input animate-fade-up delay-2">
-        <h3>Manual Input</h3>
+    
+      <!-- Manual -->
+      <div class="card manual-input animate-fade-up delay-2 hidden" id="manualForm">
+        <h3>Add Record</h3>
+      
         <div class="form-group">
-          <label for="gender">Gender</label>
+          <label>Gender</label>
           <select id="gender">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
           </select>
         </div>
+      
         <div class="form-group">
-          <label for="score">Score</label>
-          <input type="number" id="score" placeholder="e.g. 85" />
+          <label>Score</label>
+          <input type="number" id="score" placeholder="85" max="100" />
         </div>
+      
         <div class="form-group">
-          <label for="decision">Decision</label>
+          <label>Decision</label>
           <select id="decision">
-            <option value="Approved">Approved</option>
-            <option value="Rejected">Rejected</option>
+            <option>Approved</option>
+            <option>Rejected</option>
           </select>
         </div>
+      
         <button class="btn-add" id="addRecord">
-          <span>+</span> Add Record
+          + Add Record
         </button>
+        
       </div>
+    
     </div>
-
-    <!-- Data Table -->
-    <div class="card table-section animate-fade-up delay-3" id="tableSection" style="display:none;">
+  
+    <!-- Table -->
+    <div class="card table-section animate-fade-up delay-3 hidden" id="tableSection">
       <div class="table-header">
         <h3><span id="recordCount">0</span> Records</h3>
-        <button class="btn-clear" id="clearAll">🗑 Clear All</button>
+        <button class="btn-clear" id="clearAll">Clear</button>
       </div>
+    
       <div class="data-table-wrapper">
         <table class="data-table">
           <thead>
@@ -86,17 +102,22 @@
         </table>
       </div>
     </div>
-
-    <!-- Empty State -->
+  
+    <!-- Empty -->
     <div class="card empty-state animate-fade-up delay-3" id="emptyState">
-      <span>📊</span>
-      No records yet. Upload a CSV or add records manually.
-    </div>
+      <span>
+        <img src="./assests/analysis.png" width="56px" height="56px">
+      </span>
 
-    <!-- Analyze Button -->
-    <button class="btn-primary" id="analyzeBtn" disabled style="opacity:0.4;cursor:not-allowed;">
-      📊 Analyze for Bias
+      <p>No data yet. Start by uploading or adding a record.</p>
+
+    </div>
+    
+    <!-- CTA -->
+    <button class="btn-primary" id="analyzeBtn" disabled>
+      Analyze Bias
     </button>
+  
   </div>
 
   <script src="js/upload.js"></script>
@@ -112,8 +133,8 @@
 
     function updateTable() {
       const hasRecords = records.length > 0;
-      tableSection.style.display = hasRecords ? 'block' : 'none';
-      emptyState.style.display = hasRecords ? 'none' : 'block';
+      tableSection.classList.toggle('hidden', !hasRecords);
+      emptyState.classList.toggle('hidden', hasRecords);
       analyzeBtn.disabled = !hasRecords;
       analyzeBtn.style.opacity = hasRecords ? '1' : '0.4';
       analyzeBtn.style.cursor = hasRecords ? 'pointer' : 'not-allowed';
@@ -138,6 +159,21 @@
       records.push({ gender, score: Number(score), decision });
       document.getElementById('score').value = '';
       updateTable();
+    });
+
+    // Switch Button Animation
+    const switchBtn = document.getElementById('switchBtn');
+    const ManualForm = document.getElementById('manualForm');
+
+    // Handles Form Visibility
+    switchBtn.addEventListener('click', () => {
+      const isHidden = ManualForm.classList.contains('hidden');
+    
+      ManualForm.classList.toggle('hidden');
+    
+      switchBtn.textContent = isHidden
+        ? "Hide Form"
+        : "Manual Mode";
     });
 
     // Clear
