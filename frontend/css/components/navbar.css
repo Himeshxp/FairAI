@@ -1,0 +1,58 @@
+/* ===== NAVBAR ===== */
+.navbar {
+  top: 0;
+  z-index: 100;
+  padding: 16px 0;
+  background: transparent;
+  transition: var(--transition);
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: -0.5px;
+}
+
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+}
+
+.nav-links a {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+.nav-links a:hover:not(.dashboard-btn),
+.nav-links a.active:not(.dashboard-btn) {
+  color: var(--primary);
+  background: var(--accent-light);
+}

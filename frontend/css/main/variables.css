@@ -1,0 +1,45 @@
+/* ===== FairAI – Design System ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --bg: #f8f9fc;
+  --bg-alt: #ffffff;
+
+  --text: #0f172a;
+  --text-secondary: #64748b;
+  --text-contrast: #f9f9f9;
+
+  --primary: #ea580c;
+  --primary-light: #fb923c;
+  --primary-dark: #c2410c;
+  --primary-soft: #fff7ed;
+  --primary-soft-hover: #ffedd5;
+
+  --secondary: #64748b;
+  --secondary-light: #94a3b8;
+  --secondary-dark: #475569;
+  --secondary-soft: #f1f5f9;
+  --secondary-soft-hover: #e2e8f0;
+
+  --accent: #f59e0b;
+  --accent-light: rgba(245, 158, 11, 0.1);
+  --accent-soft: #fffbeb;
+
+  --success: #10b981;
+  --danger: #ef4444;
+
+  --border: #e2e8f0;
+  --glass-bg: rgba(255,255,255,0.4);
+  --glass-border: rgba(255,255,255,0.35);
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 16px -2px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 40px -8px rgba(0,0,0,0.12);
+  --shadow-primary: 0 4px 24px -6px rgba(234, 88, 12, 0.35);
+
+  --radius: 12px;
+  --radius-lg: 20px;
+
+  --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+  --font: 'Poppins', system-ui, -apple-system, sans-serif;
+}
