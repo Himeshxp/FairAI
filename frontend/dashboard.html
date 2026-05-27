@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard – FairAI</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Dashboard - FairAI</title>
+
+  <link rel="stylesheet" href="./css/main/main.css" />
+  <link rel="stylesheet" href="./css/components/navbar.css" />
+  <link rel="stylesheet" href="./css/components/dashboard/dashboard.css" />
 </head>
 <body>
-
-  <!-- Navbar -->
   <nav class="navbar">
     <div class="container">
       <a href="index.html" class="logo">
@@ -23,177 +24,47 @@
   </nav>
 
   <div class="container dashboard-content">
-  
     <div class="page-header animate-fade-up">
-      <h1>Bias Analyzer</h1>
-      <p>Upload a dataset or add records manually to evaluate decision fairness.</p>
+      <h1>AI Bias Analyzer</h1>
+      <p>Upload any CSV file. FairAI will automatically scan for potential bias patterns.</p>
     </div>
-  
+
     <div class="dashboard-flex">
-    
-      <!-- Upload -->
       <div class="upload-zone animate-fade-up delay-1" id="uploadZone">
-        <img src="./assests/csv.png" class="upload-icon">
-      
-        <h3>Upload CSV</h3>
-        <p>Drop your file here or</p>
-      
+        <img src="./assests/csv.png" class="upload-icon" alt="CSV" />
+        <h3>Upload CSV Dataset</h3>
+        <p>Drop your file here or browse</p>
+
         <div class="cta-buttons">
           <label for="csvInput">Browse Files</label>
           <input type="file" id="csvInput" accept=".csv" />
-          <button class="btn-switch" id="switchBtn">
-            Manual Mode
-          </button>
         </div>
-      </div>
-    
-      <!-- Manual -->
-      <div class="card manual-input animate-fade-up delay-2 hidden" id="manualForm">
-        <h3>Add Record</h3>
-      
-        <div class="form-group">
-          <label>Gender</label>
-          <select id="gender">
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-          </select>
-        </div>
-      
-        <div class="form-group">
-          <label>Score</label>
-          <input type="number" id="score" placeholder="85" max="100" />
-        </div>
-      
-        <div class="form-group">
-          <label>Decision</label>
-          <select id="decision">
-            <option>Approved</option>
-            <option>Rejected</option>
-          </select>
-        </div>
-      
-        <button class="btn-add" id="addRecord">
-          + Add Record
-        </button>
-        
-      </div>
-    
-    </div>
-  
-    <!-- Table -->
-    <div class="card table-section animate-fade-up delay-3 hidden" id="tableSection">
-      <div class="table-header">
-        <h3><span id="recordCount">0</span> Records</h3>
-        <button class="btn-clear" id="clearAll">Clear</button>
-      </div>
-    
-      <div class="data-table-wrapper">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Gender</th>
-              <th>Score</th>
-              <th>Decision</th>
-            </tr>
-          </thead>
-          <tbody id="tableBody"></tbody>
-        </table>
       </div>
     </div>
-  
-    <!-- Empty -->
-    <div class="card empty-state animate-fade-up delay-3" id="emptyState">
-      <span>
-        <img src="./assests/analysis.png" width="56px" height="56px">
-      </span>
 
-      <p>No data yet. Start by uploading or adding a record.</p>
-
+    <div class="card empty-state animate-fade-up delay-3" id="statusCard">
+      <span><img src="./assests/analysis.png" width="56" height="56" alt="Analysis" /></span>
+      <p id="statusText">Waiting for CSV upload.</p>
     </div>
-    
-    <!-- CTA -->
-    <button class="btn-primary" id="analyzeBtn" disabled>
-      Analyze Bias
-    </button>
-  
   </div>
 
   <script src="js/upload.js"></script>
   <script src="js/main.js"></script>
   <script>
-    // Dashboard logic
-    const records = [];
-    const tableBody = document.getElementById('tableBody');
-    const tableSection = document.getElementById('tableSection');
-    const emptyState = document.getElementById('emptyState');
-    const recordCount = document.getElementById('recordCount');
-    const analyzeBtn = document.getElementById('analyzeBtn');
+    const statusText = document.getElementById('statusText');
 
-    function updateTable() {
-      const hasRecords = records.length > 0;
-      tableSection.classList.toggle('hidden', !hasRecords);
-      emptyState.classList.toggle('hidden', hasRecords);
-      analyzeBtn.disabled = !hasRecords;
-      analyzeBtn.style.opacity = hasRecords ? '1' : '0.4';
-      analyzeBtn.style.cursor = hasRecords ? 'pointer' : 'not-allowed';
-      recordCount.textContent = records.length;
+    window.onCSVFileSelected = async function(file) {
+      statusText.textContent = 'Analyzing dataset with AI...';
 
-      tableBody.innerHTML = records.map((r, i) =>
-        `<tr>
-          <td>${i + 1}</td>
-          <td>${r.gender}</td>
-          <td>${r.score}</td>
-          <td><span class="badge ${r.decision === 'Approved' ? 'badge-success' : 'badge-danger'}">${r.decision}</span></td>
-        </tr>`
-      ).join('');
-    }
-
-    // Manual add
-    document.getElementById('addRecord').addEventListener('click', () => {
-      const gender = document.getElementById('gender').value;
-      const score = document.getElementById('score').value;
-      const decision = document.getElementById('decision').value;
-      if (!score) return;
-      records.push({ gender, score: Number(score), decision });
-      document.getElementById('score').value = '';
-      updateTable();
-    });
-
-    // Switch Button Animation
-    const switchBtn = document.getElementById('switchBtn');
-    const ManualForm = document.getElementById('manualForm');
-
-    // Handles Form Visibility
-    switchBtn.addEventListener('click', () => {
-      const isHidden = ManualForm.classList.contains('hidden');
-    
-      ManualForm.classList.toggle('hidden');
-    
-      switchBtn.textContent = isHidden
-        ? "Hide Form"
-        : "Manual Mode";
-    });
-
-    // Clear
-    document.getElementById('clearAll').addEventListener('click', () => {
-      records.length = 0;
-      updateTable();
-    });
-
-    // CSV upload callback
-    window.onCSVParsed = function(data) {
-      data.forEach(r => records.push(r));
-      updateTable();
+      try {
+        const result = await window.fairaiAPI.analyzeCsvFile(file);
+        sessionStorage.setItem('fairai_result', JSON.stringify(result));
+        window.location.href = 'result.html';
+      } catch (err) {
+        statusText.textContent = 'Analysis failed. Check backend/API key and retry.';
+        alert(err.message || 'Analysis failed.');
+      }
     };
-
-    // Analyze
-    analyzeBtn.addEventListener('click', () => {
-      if (records.length === 0) return;
-      sessionStorage.setItem('fairai_data', JSON.stringify(records));
-      window.location.href = 'result.html';
-    });
   </script>
 </body>
 </html>

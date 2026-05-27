@@ -1,0 +1,146 @@
+/* ===== RESULT PAGE ===== */
+.result-content {
+  padding: 40px 0 80px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: 28px;
+  transition: var(--transition);
+}
+
+.back-link:hover {
+  color: var(--primary);
+}
+
+/* Bias Score */
+.bias-score-card {
+  text-align: center;
+  padding: 48px 32px;
+  margin-bottom: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.bias-score-card::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(79,70,229,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.score-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.score-value {
+  font-size: 80px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -4px;
+  margin-bottom: 16px;
+}
+
+.score-value.low { color: var(--success); }
+.score-value.moderate { color: #f59e0b; }
+.score-value.high { color: var(--danger); }
+
+.score-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.score-badge.low {
+  background: rgba(16,185,129,0.1);
+  color: var(--success);
+}
+
+.score-badge.moderate {
+  background: rgba(245,158,11,0.1);
+  color: #f59e0b;
+}
+
+.score-badge.high {
+  background: rgba(239,68,68,0.1);
+  color: var(--danger);
+}
+
+/* Stats */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  padding: 28px;
+}
+
+.stat-card .stat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.stat-card .stat-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.stat-card .stat-count {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.stat-card .stat-value {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 14px;
+  letter-spacing: -1px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: var(--bg);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 100px;
+  transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+  animation: progressFill 1.2s ease-out forwards;
+}
+
+.progress-fill.primary {
+  background: linear-gradient(90deg, var(--primary), var(--primary-light));
+}
+
+.progress-fill.accent {
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+}

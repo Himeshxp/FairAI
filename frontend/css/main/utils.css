@@ -1,0 +1,108 @@
+/* --- Utilities --- */
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--glass-border);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  box-shadow: var(--shadow-primary);
+  transition: var(--transition);
+  font-family: var(--font);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  background: var(--bg-alt);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font);
+}
+
+.btn-secondary:hover {
+  background: var(--bg);
+  border-color: var(--primary-light);
+  color: var(--primary);
+}
+
+.card {
+  background: var(--bg-alt);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Animation UTILITIES */
+
+.animate-fade-up {
+  animation: fadeUp 0.7s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+.delay-1 { animation-delay: 0.1s; opacity: 0; }
+.delay-2 { animation-delay: 0.2s; opacity: 0; }
+.delay-3 { animation-delay: 0.3s; opacity: 0; }
+.delay-4 { animation-delay: 0.4s; opacity: 0; }
+.delay-5 { animation-delay: 0.5s; opacity: 0; }

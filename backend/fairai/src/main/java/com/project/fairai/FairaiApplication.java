@@ -9,5 +9,4 @@ public class FairaiApplication {
     public static void main(String[] args) {
         SpringApplication.run(FairaiApplication.class, args);
     }
-
 }

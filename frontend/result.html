@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Results – FairAI</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Results - FairAI</title>
+
+  <link rel="stylesheet" href="./css/main/main.css" />
+  <link rel="stylesheet" href="./css/components/navbar.css" />
+  <link rel="stylesheet" href="./css/components/result/result.css" />
 </head>
 <body>
-
-  <!-- Navbar -->
   <nav class="navbar scrolled">
     <div class="container">
       <a href="index.html" class="logo">
@@ -23,56 +24,57 @@
   </nav>
 
   <div class="container result-content">
-    <a href="dashboard.html" class="back-link animate-fade-up">← Back to Dashboard</a>
+    <a href="dashboard.html" class="back-link animate-fade-up">Back to Dashboard</a>
 
     <div class="page-header animate-fade-up delay-1">
-      <h1>Analysis Results</h1>
+      <h1>AI Bias Analysis</h1>
     </div>
 
-    <!-- Bias Score -->
     <div class="card bias-score-card animate-scale-in delay-2">
       <div class="score-label">Bias Score</div>
-      <div class="score-value" id="scoreValue">—</div>
-      <div class="score-badge" id="scoreBadge">Loading…</div>
+      <div class="score-value" id="scoreValue">-</div>
+      <div class="score-badge" id="scoreBadge">Loading...</div>
     </div>
 
-    <!-- Stats -->
     <div class="stats-grid">
       <div class="card stat-card animate-fade-up delay-3">
         <div class="stat-header">
-          <span class="stat-label">Male Approval Rate</span>
-          <span class="stat-count" id="maleCount">—</span>
+          <span class="stat-label">Verdict</span>
+          <span class="stat-count" id="maleCount">AI</span>
         </div>
-        <div class="stat-value" id="maleRate">—</div>
+        <div class="stat-value" id="maleRate">-</div>
         <div class="progress-bar">
           <div class="progress-fill primary" id="maleBar" style="width:0%"></div>
         </div>
       </div>
       <div class="card stat-card animate-fade-up delay-4">
         <div class="stat-header">
-          <span class="stat-label">Female Approval Rate</span>
-          <span class="stat-count" id="femaleCount">—</span>
+          <span class="stat-label">Confidence</span>
+          <span class="stat-count" id="femaleCount">Model</span>
         </div>
-        <div class="stat-value" id="femaleRate">—</div>
+        <div class="stat-value" id="femaleRate">-</div>
         <div class="progress-bar">
           <div class="progress-fill accent" id="femaleBar" style="width:0%"></div>
         </div>
       </div>
     </div>
 
-    <!-- Explanation -->
     <div class="card explanation-card animate-fade-up delay-4">
-      <div class="card-title"><span>📈</span> AI Explanation</div>
-      <p id="explanation">Loading analysis…</p>
+      <div class="card-title"><span>AI Summary</span></div>
+      <p id="explanation">Loading analysis...</p>
     </div>
 
-    <!-- Suggestions -->
+    <div class="card suggestions-card animate-fade-up delay-5">
+      <h3>Findings</h3>
+      <ul class="suggestion-list" id="findings"></ul>
+    </div>
+
     <div class="card suggestions-card animate-fade-up delay-5">
       <h3>Recommendations</h3>
       <ul class="suggestion-list" id="suggestions"></ul>
     </div>
 
-    <a href="dashboard.html" class="btn-primary">Analyze Again</a>
+    <a href="dashboard.html" class="btn-primary">Analyze Another File</a>
   </div>
 
   <script src="js/result.js"></script>
